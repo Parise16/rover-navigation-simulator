@@ -1,57 +1,57 @@
 # Rover Navigation Simulator
 
-A console-based Java application that simulates the navigation of a rover through different terrain conditions and obstacles.
+Aplicação Java executada via terminal que simula a navegação de um rover em diferentes condições de terreno e diante de obstáculos.
 
-The system analyzes factors such as obstacle type, terrain, inclination and distance to determine whether the rover can safely cross an obstacle or needs to change its route. Throughout the simulation, the application also monitors battery consumption and records the rover's mission history.
+O sistema analisa fatores como tipo de obstáculo, terreno, inclinação e distância para decidir se o rover pode atravessar o obstáculo com segurança ou se precisa desviar a rota. Durante a missão, a aplicação também monitora o consumo de bateria e registra o histórico de navegação.
 
-## Features
+## Funcionalidades
 
-- Rover configuration with a customizable maximum inclination
-- Input validation for user interactions
-- Simulation of different terrain conditions
-- Detection of rocks and holes
-- Terrain-based navigation limitations
-- Simulated distance measurement
-- Automatic decision between crossing or avoiding obstacles
-- Calculation of deviation angles
-- Battery consumption based on terrain and movement
-- Mission history tracking
-- Final mission report
+- Configuração do rover com inclinação máxima suportada
+- Validação das entradas do usuário
+- Simulação de diferentes condições de terreno
+- Detecção de pedras e buracos
+- Limitações de navegação de acordo com o terreno
+- Simulação de distância até obstáculos
+- Decisão automática entre atravessar ou desviar
+- Cálculo do ângulo de desvio
+- Consumo de bateria baseado no terreno e no movimento
+- Registro do histórico da missão
+- Relatório final da missão
 
-## How It Works
+## Como funciona
 
-During the simulation, the rover evaluates the environment before deciding how to proceed.
+Durante a simulação, o rover analisa o ambiente antes de decidir como prosseguir.
 
-1. The user configures the rover model and its maximum supported inclination.
-2. The system checks whether an obstacle is present.
-3. The terrain is classified as:
-   - Flat
-   - Rocky
-   - Soft Sand
-4. The obstacle inclination is evaluated according to the rover's capabilities and terrain conditions.
-5. If the obstacle can be crossed safely, the rover moves over it.
-6. If the inclination is too high, the system evaluates the available space on both sides.
-7. The rover calculates a deviation angle and selects the shortest route around the obstacle.
-8. Every movement affects battery consumption.
-9. At the end of the simulation, a mission report is generated.
+1. O usuário informa o modelo do rover e sua inclinação máxima suportada.
+2. O sistema verifica se existe um obstáculo no caminho.
+3. O terreno é classificado como:
+   - Plano
+   - Rochoso
+   - Areia fofa
+4. A inclinação do obstáculo é comparada com a capacidade do rover e com as condições do terreno.
+5. Se o obstáculo puder ser atravessado com segurança, o rover segue em frente.
+6. Caso a inclinação seja muito alta, o sistema analisa o espaço disponível nos dois lados.
+7. O rover calcula um ângulo de desvio e seleciona a menor rota ao redor do obstáculo.
+8. Cada movimento afeta o consumo de bateria.
+9. Ao final, o sistema gera um relatório da missão.
 
-## Navigation Logic
+## Lógica de navegação
 
-Terrain conditions affect the rover's effective maximum inclination.
+As condições do terreno alteram a inclinação máxima efetiva suportada pelo rover:
 
-- **Flat terrain:** 100% of the configured inclination capacity
-- **Rocky terrain:** 90% of the configured inclination capacity
-- **Soft sand:** 80% of the configured inclination capacity
+- **Terreno plano:** 100% da capacidade configurada
+- **Terreno rochoso:** 90% da capacidade configurada
+- **Areia fofa:** 80% da capacidade configurada
 
-When a deviation is necessary, the rover calculates the turning angle using the obstacle width and its simulated distance.
+Quando é necessário desviar de um obstáculo, o rover calcula o ângulo de mudança de direção utilizando a largura do obstáculo e sua distância simulada:
 
 ```java
 Math.toDegrees(Math.atan(largura / distancia));
 ```
 
-This allows the program to determine the required direction change during obstacle avoidance.
+Esse cálculo permite estimar o ângulo necessário para contornar o obstáculo.
 
-## Project Structure
+## Estrutura do projeto
 
 ```text
 src/
@@ -66,85 +66,76 @@ src/
 
 ### `NavegacaoRover`
 
-Application entry point responsible for user interaction, input validation and simulation flow.
+Ponto de entrada da aplicação. Responsável pela interação com o usuário, validação das entradas e controle do fluxo da simulação.
 
 ### `Rover`
 
-Represents the rover and contains the navigation logic, battery management, obstacle analysis and mission history.
+Representa o rover e concentra a lógica de navegação, gerenciamento de bateria, análise de obstáculos e histórico da missão.
 
 ### `Obstaculo`
 
-Represents an obstacle and stores information such as its type, dimensions, inclination and terrain conditions.
+Representa um obstáculo e armazena informações como tipo, dimensões, inclinação e condições do terreno.
 
 ### `Imagem`
 
-Simulates the rover's environmental capture process, associating detected obstacles with distance information.
+Simula o processo de captura do ambiente pelo rover, associando os obstáculos detectados a informações de distância.
 
-## Technologies
+## Tecnologias e conceitos utilizados
 
 - Java
-- Object-Oriented Programming
-- Java Collections
-- Mathematical calculations
-- Console-based application
+- Programação Orientada a Objetos
+- Classes e objetos
+- Construtores
+- Métodos
+- Collections
+- Validação de entrada
+- Estruturas condicionais
+- Cálculos matemáticos
+- Organização de código
+- Resolução de problemas
 
-## Running the Project
+## Como executar
 
-### Requirements
+### Requisitos
 
-Java JDK installed on your computer.
+- Java JDK instalado
 
-Clone the repository:
+Clone o repositório:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/rover-navigation-simulator.git
+git clone https://github.com/Parise16/rover-navigation-simulator.git
 ```
 
-Enter the project directory:
+Entre na pasta do projeto:
 
 ```bash
 cd rover-navigation-simulator
 ```
 
-Compile the project:
+Compile:
 
 ```bash
 javac -d out src/modelos/Imagem.java src/modelos/Obstaculo.java src/modelos/Rover.java src/aplicacao/NavegacaoRover.java
 ```
 
-Run:
+Execute:
 
 ```bash
 java -cp out aplicacao.NavegacaoRover
 ```
 
-You can also open the project using an IDE such as IntelliJ IDEA.
+Também é possível abrir e executar o projeto em uma IDE como IntelliJ IDEA.
 
-## Concepts Explored
+## Possíveis melhorias
 
-This project was developed to explore concepts including:
+- Testes unitários
+- Melhor encapsulamento dos atributos do rover
+- Separação entre lógica de simulação e interface com o usuário
+- Visualização gráfica da rota
+- Novos tipos de terreno
+- Novos tipos de obstáculos
+- Persistência do histórico das missões
 
-- Object-oriented modeling
-- Classes and objects
-- Constructors
-- Methods
-- Collections
-- Input validation
-- Conditional logic
-- Mathematical calculations
-- Code organization
-- Problem solving
+## Contexto acadêmico
 
-## Future Improvements
-
-Possible improvements for future versions include:
-
-- Unit tests
-- Improved encapsulation of rover attributes
-- Separation between simulation and user interface logic
-- Graphical visualization of the rover's route
-- More terrain and obstacle types
-
-## Academic Context
-
-Academic project developed during my Computer Engineering studies at FIAP.
+Projeto acadêmico desenvolvido durante a graduação em Engenharia da Computação na FIAP, com foco em Programação Orientada a Objetos, modelagem de classes, lógica de decisão e simulação de navegação.
